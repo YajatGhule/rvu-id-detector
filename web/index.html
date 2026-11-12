@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live - RVU ID Card Detector</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="index.html">Live</a>
+      <a href="upload.html">Upload</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+    </div>
+
+    <div class="content">
+      <h1>Live view</h1>
+      <p>Each person in the camera view gets a box. Green means wearing the RVU ID card, red means not wearing it, and grey means unsure.</p>
+
+      <img class="video-box" src="http://127.0.0.1:8000/stream" alt="Detector offline. Start the detector with the command uv run idcard serve in the project folder, then reload this page." width="640" height="480" />
+
+      <h2>Counts</h2>
+      <p>Counts and frames per second update every second.</p>
+      <iframe class="stats-frame" src="http://127.0.0.1:8000/fragments/stats" title="Live counts">
+        Your browser does not show frames. Open the stats page at http://127.0.0.1:8000/fragments/stats
+      </iframe>
+
+      <h2>Colour legend</h2>
+      <ul class="legend">
+        <li><span class="wearing">Green box (WEARING)</span>: the lanyard band colour is found on the torso.</li>
+        <li><span class="not-wearing">Red box (NOT WEARING)</span>: no band colour for several seconds. This is logged in History.</li>
+        <li><span class="unsure">Grey box (UNSURE)</span>: the torso is hidden or the result is not clear yet. This is not a violation.</li>
+      </ul>
+    </div>
+
+    <div class="footer">RVU ID Card Detector. Everything runs on this computer.</div>
+  </body>
+</html>

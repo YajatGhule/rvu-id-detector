@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - RVU ID Card Detector</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="index.html">Live</a>
+      <a href="upload.html">Upload</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+    </div>
+
+    <div class="content">
+      <h1>About this project</h1>
+      <p>The RVU ID Card Detector checks whether each person in the camera view is wearing the RVU ID card on its lanyard. It is a Web Technology course project. The web pages are plain HTML and CSS, and the detection runs in a Python program on the same computer.</p>
+
+      <h2>How the detector works</h2>
+
+      <h3>1. Finding people and their pose</h3>
+      <p>A neural network called YOLO11n-pose finds every person in each frame. For each person it gives a box around the body and 17 body points, such as the eyes, shoulders and hips.</p>
+
+      <h3>2. Keeping track of each person</h3>
+      <p>A tracker called ByteTrack gives each person a number that stays the same from frame to frame. This lets the detector follow one person over time instead of treating every frame as new.</p>
+
+      <h3>3. Finding the torso</h3>
+      <p>From the shoulders and hips the program cuts out the torso, the area from the neck to the waist, where a lanyard normally hangs. If the face or torso cannot be seen, for example when a person has their back turned, the person is marked UNSURE. UNSURE is not counted as a violation.</p>
+
+      <h3>4. Checking the band colour</h3>
+      <p>The program counts the pixels in the torso area that match the lanyard band colour you set in Settings. Each colour is compared in a way that is close to how people see colour. The tolerance setting decides how close a colour must be. This check also rejects lanyards of other colours.</p>
+
+      <h3>5. Combining and smoothing the result</h3>
+      <p>The colour score is combined with the detector confidence to give one score between 0 and 1. The program looks at the last few frames for each person and takes a vote. Two thresholds, one for WEARING and one for NOT WEARING, stop the box from flickering between colours when the score is near the limit.</p>
+
+      <h3>6. Showing and logging the result</h3>
+      <p>Green means WEARING, red means NOT WEARING and grey means UNSURE. If a person stays NOT WEARING for the number of seconds set in Settings, the program saves one cropped picture and a row in a local database. The History page lists these rows, and they can be exported as a CSV file or deleted.</p>
+
+      <h2>Privacy</h2>
+      <p>Everything stays on this computer. Video frames and snapshots are not uploaded to any server. The web pages talk only to the detector running on 127.0.0.1, which means this computer only.</p>
+
+      <h2>Limits</h2>
+      <p>The detector is a student prototype. It can make mistakes when lighting is poor, when the lanyard is hidden under clothing, or when a similar colour is worn. Results should be checked by a person.</p>
+    </div>
+
+    <div class="footer">RVU ID Card Detector. Everything runs on this computer.</div>
+  </body>
+</html>
