@@ -5,3 +5,4 @@ data/
 settings.json
 *.pt
 .pytest_cache/
+.env
