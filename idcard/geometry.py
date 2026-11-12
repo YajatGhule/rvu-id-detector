@@ -13,8 +13,8 @@ L_SHOULDER, R_SHOULDER, L_HIP, R_HIP = 5, 6, 11, 12
 
 KEYPOINT_CONF = 0.5       # a keypoint counts as visible at or above this confidence
 FACE_CONF = 0.5           # nose or an eye at least this sure -> the face is towards us
-MIN_TORSO_W = 32          # pixels; smaller than this is too far away to see a lanyard
-MIN_TORSO_H = 40
+MIN_TORSO_W = 70          # pixels; narrower than this the strap is under ~4 px wide: cannot judge
+MIN_TORSO_H = 90
 TORSO_PER_SHOULDER = 1.4  # shoulder-to-hip distance is about 1.4 x the shoulder width
 MIN_FRONTAL_RATIO = 0.35  # shoulder width / torso height below this = standing side-on
 
