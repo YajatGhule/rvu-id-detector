@@ -1,0 +1,31 @@
+[project]
+name = "rvu-id-detector"
+version = "0.1.0"
+description = "Local website that detects whether each person on camera is wearing the RVU ID card"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "python-multipart>=0.0.9",
+    "opencv-python-headless>=4.9",
+    "numpy",
+    "onnxruntime>=1.19",
+    "supervision>=0.25",
+]
+
+[project.scripts]
+idcard = "idcard.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["idcard"]
+
+[dependency-groups]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
