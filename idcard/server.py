@@ -246,7 +246,7 @@ def create_app(root: Path = REPO_ROOT, pipeline_factory=None, source=None) -> Fa
             return page("Upload failed", "<h1>Could not read that file</h1>" + back)
         url = esc("/uploads/" + out.name)
         if ext in IMAGE_EXTS:
-            shown = f'<img src="{url}" alt="Annotated result" style="max-width:100%">'
+            shown = f'<img src="{url}" alt="Annotated result">'
         else:
             shown = f'<p><a href="{url}" download>Download the annotated video</a></p>'
         return page("Result", f"<h1>Result</h1>{shown}" + back)
