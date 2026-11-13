@@ -1,38 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>History - RVU ID Card Detector</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div class="navbar">
-      <a href="index.html">Live</a>
-      <a href="upload.html">Upload</a>
-      <a href="history.html">History</a>
-      <a href="settings.html">Settings</a>
+    <h1>RVU ID Card Detector</h1>
+
+    <p class="menu">
+      <a href="index.html">Home</a> |
+      <a href="upload.html">Upload</a> |
+      <a href="history.html">History</a> |
+      <a href="settings.html">Settings</a> |
       <a href="about.html">About</a>
-    </div>
+    </p>
+    <hr />
 
-    <div class="content">
-      <h1>Violation history</h1>
-      <p>Each row is a person who stayed NOT WEARING the ID card for long enough. The newest rows are at the top.</p>
+    <h2>History</h2>
+    <p>This table shows every time a student was seen without the ID card.</p>
 
-      <iframe class="history-frame" src="http://127.0.0.1:8000/fragments/history" title="Violation log">
-        Your browser does not show frames. Open the log at http://127.0.0.1:8000/fragments/history
-      </iframe>
+    <iframe src="http://127.0.0.1:8000/fragments/history" width="800" height="400"></iframe>
 
-      <h2>Export and clear</h2>
-      <p><a href="http://127.0.0.1:8000/history.csv">Download the history as a CSV file</a></p>
+    <p><a href="http://127.0.0.1:8000/history.csv">Download the table as a CSV file</a></p>
 
-      <form method="post" action="http://127.0.0.1:8000/api/history/clear">
-        <p class="help">Clearing deletes every row and every snapshot picture. This cannot be undone.</p>
-        <input class="button danger" type="submit" value="Delete all history" />
-      </form>
-    </div>
+    <h2>Delete history</h2>
+    <form method="post" action="http://127.0.0.1:8000/api/history/clear">
+      <p class="note">This deletes all rows and all saved photos. It cannot be undone.</p>
+      <p>
+        <input type="submit" value="Delete all history" />
+      </p>
+    </form>
 
-    <div class="footer">RVU ID Card Detector. Everything runs on this computer.</div>
+    <hr />
+    <p class="footer">Web Technology project. Everything runs on this computer.</p>
   </body>
 </html>

@@ -1,86 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings - RVU ID Card Detector</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div class="navbar">
-      <a href="index.html">Live</a>
-      <a href="upload.html">Upload</a>
-      <a href="history.html">History</a>
-      <a href="settings.html">Settings</a>
+    <h1>RVU ID Card Detector</h1>
+
+    <p class="menu">
+      <a href="index.html">Home</a> |
+      <a href="upload.html">Upload</a> |
+      <a href="history.html">History</a> |
+      <a href="settings.html">Settings</a> |
       <a href="about.html">About</a>
-    </div>
+    </p>
+    <hr />
 
-    <div class="content">
-      <h1>Settings</h1>
-      <p>Change the values below and press Save. Changes apply to the live view straight away.</p>
+    <h2>Settings</h2>
+    <p>Change the values and press Save.</p>
 
-      <form method="post" action="http://127.0.0.1:8000/api/settings">
+    <form method="post" action="http://127.0.0.1:8000/api/settings">
+      <table>
+        <tr>
+          <td><label for="band_color">Band colour of the ID card</label></td>
+          <td><input type="color" id="band_color" name="band_color" value="#1e40af" /></td>
+        </tr>
+        <tr>
+          <td><label for="tolerance">Colour tolerance (5 to 80)</label></td>
+          <td><input type="number" id="tolerance" name="tolerance" min="5" max="80" value="25" /></td>
+        </tr>
+        <tr>
+          <td><label for="on_threshold">Score needed for WEARING (0 to 1)</label></td>
+          <td><input type="number" id="on_threshold" name="on_threshold" min="0" max="1" step="0.05" value="0.6" /></td>
+        </tr>
+        <tr>
+          <td><label for="off_threshold">Score for NOT WEARING (0 to 1)</label></td>
+          <td><input type="number" id="off_threshold" name="off_threshold" min="0" max="1" step="0.05" value="0.35" /></td>
+        </tr>
+        <tr>
+          <td><label for="violation_seconds">Seconds before it is saved in History</label></td>
+          <td><input type="number" id="violation_seconds" name="violation_seconds" min="0" step="0.5" value="3.0" /></td>
+        </tr>
+        <tr>
+          <td><label for="person_conf">Person confidence (0 to 1)</label></td>
+          <td><input type="number" id="person_conf" name="person_conf" min="0" max="1" step="0.05" value="0.4" /></td>
+        </tr>
+        <tr>
+          <td><label for="camera">Camera number (0 is the first webcam)</label></td>
+          <td><input type="text" id="camera" name="camera" value="0" /></td>
+        </tr>
+        <tr>
+          <td><label for="device">Run on</label></td>
+          <td>
+            <select id="device" name="device">
+              <option value="auto">auto</option>
+              <option value="cpu">cpu</option>
+              <option value="cuda">cuda</option>
+              <option value="directml">directml</option>
+              <option value="openvino">openvino</option>
+              <option value="coreml">coreml</option>
+            </select>
+          </td>
+        </tr>
+      </table>
 
-        <div class="form-row">
-          <label for="band_color">Lanyard band colour</label>
-          <input type="color" id="band_color" name="band_color" value="#1e40af" />
-          <p class="help">Pick the colour of the RVU lanyard band.</p>
-        </div>
+      <p>
+        <input type="submit" value="Save" />
+      </p>
+    </form>
 
-        <div class="form-row">
-          <label for="tolerance">Colour tolerance (5 to 80)</label>
-          <input type="range" id="tolerance" name="tolerance" min="5" max="80" value="25" />
-          <p class="help">A higher value accepts colours that are less similar to the band colour.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="on_threshold">WEARING threshold (0 to 1)</label>
-          <input type="number" id="on_threshold" name="on_threshold" min="0" max="1" step="0.05" value="0.6" />
-          <p class="help">A person is marked WEARING when the smoothed score is at or above this value.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="off_threshold">NOT WEARING threshold (0 to 1)</label>
-          <input type="number" id="off_threshold" name="off_threshold" min="0" max="1" step="0.05" value="0.35" />
-          <p class="help">A person is marked NOT WEARING when the smoothed score is at or below this value.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="violation_seconds">Seconds before logging a violation</label>
-          <input type="number" id="violation_seconds" name="violation_seconds" min="0" step="0.5" value="3.0" />
-          <p class="help">How long a person must stay NOT WEARING before a snapshot is saved to History.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="person_conf">Person detection confidence (0 to 1)</label>
-          <input type="number" id="person_conf" name="person_conf" min="0" max="1" step="0.05" value="0.4" />
-          <p class="help">Lower values find more people but may give more false boxes.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="camera">Camera (index or video file path)</label>
-          <input type="text" id="camera" name="camera" value="0" />
-          <p class="help">Use 0 for the first webcam, or the path to a video file.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="device">Processing device</label>
-          <select id="device" name="device">
-            <option value="auto">auto</option>
-            <option value="cpu">cpu</option>
-            <option value="cuda">cuda</option>
-            <option value="directml">directml</option>
-            <option value="openvino">openvino</option>
-            <option value="coreml">coreml</option>
-          </select>
-          <p class="help">auto picks the fastest device found. cpu always works.</p>
-        </div>
-
-        <input class="button" type="submit" value="Save settings" />
-      </form>
-    </div>
-
-    <div class="footer">RVU ID Card Detector. Everything runs on this computer.</div>
+    <hr />
+    <p class="footer">Web Technology project. Everything runs on this computer.</p>
   </body>
 </html>
