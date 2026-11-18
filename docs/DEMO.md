@@ -2,7 +2,21 @@
 
 These steps run the website for the CIE-3 demo. Do them once at home, not in the exam room.
 
-## 1. Install (once, needs internet)
+## 0. Quick way: the Windows scripts
+
+Download `install-windows.ps1` from the repository, open PowerShell in that folder and run:
+
+```
+powershell -ExecutionPolicy Bypass -File .\install-windows.ps1
+```
+
+It installs Git and uv, gets the project, installs Python 3.12 and all packages, and tests the
+model. Then double click `start-windows.bat` to run the website and open it in the browser.
+For Intel Arc add `-Openvino` at the end of the command (optional and untested). The scripts
+were written on Linux and have not been run on Windows yet, so do a trial run at home.
+They need the `web-refactor` branch to be on GitHub, otherwise they fall back to `main`.
+
+## 1. Install by hand (once, needs internet)
 
 1. Install Git and [uv](https://docs.astral.sh/uv/) (it installs Python 3.12 by itself).
 2. Open a terminal and run:
