@@ -1,54 +1,178 @@
+/* RVU ID Card Detector - one external style sheet for every page */
+
+/* universal selector + box model: padding and border count inside the width */
+* {
+  box-sizing: border-box;
+}
+
+/* element selectors */
 body {
   font-family: Arial, sans-serif;
-  background-color: white;
-  color: black;
-  margin: 20px;
+  background-color: #f4f7fb;
+  color: #222222;
+  margin: 0;
+  line-height: 1.5;
 }
 
 h1 {
-  color: darkblue;
-  font-size: 30px;
+  color: white;
+  font-size: 2rem;
+  margin: 0;
 }
 
 h2 {
   color: darkblue;
-  font-size: 22px;
+  font-size: 1.4rem;
   border-bottom: 2px solid lightblue;
+  padding-bottom: 4px;
 }
 
-p {
-  font-size: 16px;
+/* header and menu: Flexbox */
+header {
+  background-color: darkblue;
+  padding: 20px;
 }
 
-a {
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: lightblue;
+  padding: 10px 20px;
+}
+
+nav a {
+  padding: 6px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: darkblue;
+  font-weight: bold;
+}
+
+nav a:hover {
+  background-color: white;
+}
+
+nav a.active {
+  background-color: darkblue;
+  color: white;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: grey;
+  padding: 20px;
+}
+
+/* link states (order: link, visited, hover, active) */
+a:link {
   color: blue;
 }
 
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: red;
+}
+
+a:active {
+  color: orange;
+}
+
+/* images: never wider than the screen */
 img {
+  max-width: 100%;
+  height: auto;
   border: 2px solid black;
 }
 
 iframe {
+  width: 100%;
   border: 1px solid grey;
+  background-color: white;
 }
 
+/* tables */
 table {
   border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
 }
 
 th {
   background-color: lightblue;
 }
 
-th, td {
-  border: 1px solid black;
+tr:nth-child(even) {
+  background-color: #eef3fa;
+}
+
+/* forms */
+label {
+  font-weight: bold;
+}
+
+input, select {
   padding: 6px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
-.menu {
-  font-size: 18px;
+input:focus, select:focus {
+  border-color: darkblue;
+  background-color: #fffbe6;
 }
 
+input[type="submit"], button {
+  background-color: darkblue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover, button:hover {
+  background-color: blue;
+}
+
+/* box model card: padding, border, margin */
+.card {
+  background-color: white;
+  border: 1px solid lightblue;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+/* Grid of cards: 3 columns on a laptop */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.cards .card {
+  margin: 0;
+}
+
+/* class selectors */
 .green {
   color: green;
 }
@@ -63,9 +187,32 @@ th, td {
 
 .note {
   color: darkred;
+  font-size: 0.9rem;
 }
 
-.footer {
-  font-size: 13px;
-  color: grey;
+/* id selector */
+#message {
+  font-weight: bold;
+  color: darkblue;
+}
+
+#message.error {
+  color: red;
+}
+
+/* specificity: the id (#message.error) beats the class (.note) beats the element (p) */
+
+/* responsive: on a phone or a small window the cards stack and the menu wraps */
+@media (max-width: 700px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding: 10px;
+  }
 }

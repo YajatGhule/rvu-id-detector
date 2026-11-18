@@ -1,39 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Upload - RVU ID Card Detector</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <h1>RVU ID Card Detector</h1>
+    <header>
+      <h1>RVU ID Card Detector</h1>
+    </header>
 
-    <p class="menu">
-      <a href="index.html">Home</a> |
-      <a href="upload.html">Upload</a> |
-      <a href="history.html">History</a> |
-      <a href="settings.html">Settings</a> |
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
       <a href="about.html">About</a>
-    </p>
-    <hr />
+      <a href="gallery.html">Gallery</a>
+    </nav>
 
-    <h2>Upload a photo or a video</h2>
-    <p>Choose a file and press the button. The result comes back with the boxes drawn on it.</p>
+    <main>
+      <section class="card">
+        <h2>Upload a photo or a video</h2>
+        <p>Choose a file and press the button. The result comes back with the boxes drawn on it.</p>
 
-    <form method="post" enctype="multipart/form-data" action="http://127.0.0.1:8000/api/upload">
-      <p>
-        <label for="file">File:</label>
-        <input type="file" id="file" name="file" />
-      </p>
-      <p>
-        <input type="submit" value="Upload and check" />
-      </p>
-    </form>
+        <form id="upload-form" method="post" enctype="multipart/form-data" action="api/upload">
+          <p>
+            <label for="file">File:</label>
+            <input type="file" id="file" name="file" accept=".jpg,.jpeg,.png,.bmp,.webp,.mp4,.avi,.mov,.mkv,.webm" required />
+          </p>
+          <p id="message"></p>
+          <p>
+            <input type="submit" value="Upload and check" />
+          </p>
+        </form>
 
-    <p class="note">Allowed files: JPG, PNG, MP4, AVI, MOV. The detector must be running.</p>
+        <p class="note">Allowed files: JPG, PNG, MP4, AVI, MOV. The detector must be running.</p>
+      </section>
+    </main>
 
-    <hr />
-    <p class="footer">Web Technology project. Everything runs on this computer.</p>
+    <footer>
+      <p>Web Technology mini project. Everything runs on this computer.</p>
+    </footer>
+
+    <script src="script.js"></script>
   </body>
 </html>

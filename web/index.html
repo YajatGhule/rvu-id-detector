@@ -1,39 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Home - RVU ID Card Detector</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <h1>RVU ID Card Detector</h1>
+    <header>
+      <h1>RVU ID Card Detector</h1>
+    </header>
 
-    <p class="menu">
-      <a href="index.html">Home</a> |
-      <a href="upload.html">Upload</a> |
-      <a href="history.html">History</a> |
-      <a href="settings.html">Settings</a> |
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
       <a href="about.html">About</a>
-    </p>
-    <hr />
+      <a href="gallery.html">Gallery</a>
+    </nav>
 
-    <h2>Live camera</h2>
-    <p>Every person in front of the camera gets a box.</p>
+    <main>
+      <section>
+        <h2>Live camera</h2>
+        <p>Every person in front of the camera gets a box.</p>
+        <p id="message"></p>
+        <img id="live" src="stream" alt="Live camera with a box around every person" width="640" height="480" />
+      </section>
 
-    <img src="http://127.0.0.1:8000/stream" alt="The detector is not running. Open a terminal in the project folder, type uv run idcard serve and then reload this page." width="640" height="480" />
+      <section>
+        <h2>What the colours mean</h2>
+        <div class="cards">
+          <div class="card"><b class="green">Green box</b><br />The student is wearing the ID card.</div>
+          <div class="card"><b class="red">Red box</b><br />The student is not wearing the ID card.</div>
+          <div class="card"><b class="grey">Grey box</b><br />Not sure. The person is turned away or too far.</div>
+        </div>
+      </section>
 
-    <h2>What the colours mean</h2>
-    <ul>
-      <li><b class="green">Green box</b> - the student is wearing the ID card.</li>
-      <li><b class="red">Red box</b> - the student is not wearing the ID card.</li>
-      <li><b class="grey">Grey box</b> - not sure (the person is turned away or too far).</li>
-    </ul>
+      <section>
+        <h2>Count</h2>
+        <iframe src="fragments/stats" height="60" title="Live count"></iframe>
+      </section>
+    </main>
 
-    <h2>Count</h2>
-    <iframe src="http://127.0.0.1:8000/fragments/stats" width="640" height="60"></iframe>
+    <footer>
+      <p>Web Technology mini project. Everything runs on this computer. Tip: press 1 to 6 to change page.</p>
+    </footer>
 
-    <hr />
-    <p class="footer">Web Technology project. Everything runs on this computer.</p>
+    <script src="script.js"></script>
   </body>
 </html>
