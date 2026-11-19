@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>About - RVU ID Card Detector</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="style.css" />
     <!-- Internal CSS: a style written inside the page, only for this page -->
     <style>
@@ -14,117 +15,149 @@
   </head>
 
   <body>
-    <header>
-      <h1>RVU ID Card Detector</h1>
-    </header>
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="upload.html">Upload</a>
-      <a href="history.html">History</a>
-      <a href="settings.html">Settings</a>
-      <a href="about.html">About</a>
-      <a href="gallery.html">Gallery</a>
+    <!-- menu bar (Bootstrap navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-rvu">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">RVU ID Card Detector</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Open the menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="upload.html">Upload</a></li>
+            <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+            <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
-    <main>
-      <section>
-        <h2>About this project</h2>
-        <p>This website checks if a student is wearing the RVU ID card. It works with a webcam, a photo or a video.</p>
-        <!-- Inline CSS: a style written on one tag -->
-        <p style="font-style: italic;">Static pages show the same thing to everyone. Dynamic pages change with the data. This site is dynamic: the camera picture, the count and the history table come from a Python program.</p>
-      </section>
+    <header class="page-title">
+      <div class="container">
+        <h1>About this project</h1>
+        <p class="text-muted mb-0">This website checks if a student is wearing the RVU ID card.</p>
+      </div>
+    </header>
 
-      <section>
-        <h2>How it works</h2>
-        <ol>
-          <li>The program finds every person in the picture.</li>
-          <li>Each person gets a number so that the program can follow them.</li>
-          <li>It looks at the chest of the person for the band of the ID card.</li>
-          <li>It checks a few pictures one after another so that the answer does not keep changing.</li>
-          <li>If a student has no ID card for a few seconds, a photo is saved in History.</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2>Front end and back end</h2>
-        <div class="cards">
-          <div class="card"><b>Front end</b><br />HTML, CSS and JavaScript. This is what you see in the browser.</div>
-          <div class="card"><b>Back end</b><br />Python with FastAPI. It finds people and saves the history.</div>
-          <div class="card"><b>Full stack</b><br />Both parts together make one working website.</div>
+    <main class="container">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5 card-title">What it does</h2>
+          <p>It works with a webcam, a photo or a video.</p>
+          <!-- Inline CSS: a style written on one tag -->
+          <p style="font-style: italic;">Static pages show the same thing to everyone. Dynamic pages change with the data. This site is dynamic: the camera picture, the count and the history table come from a Python program.</p>
         </div>
-      </section>
+      </div>
 
-      <section>
-        <h2>What is used</h2>
-        <button type="button" id="toggle-details">Hide the technology table</button>
-        <div id="details">
-          <table>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5 card-title">How it works</h2>
+          <ol>
+            <li>The program finds every person in the picture.</li>
+            <li>Each person gets a number so that the program can follow them.</li>
+            <li>It looks at the chest of the person for the band of the ID card.</li>
+            <li>It checks a few pictures one after another so that the answer does not keep changing.</li>
+            <li>If a student has no ID card for a few seconds, a photo is saved in History.</li>
+          </ol>
+        </div>
+      </div>
+
+      <h2 class="h5 mb-3">Front end and back end</h2>
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="card h-100 border-primary">
+            <div class="card-body"><h3 class="h6">Front end</h3>HTML, CSS, JavaScript and Bootstrap. This is what you see in the browser.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-success">
+            <div class="card-body"><h3 class="h6">Back end</h3>Python with FastAPI. It finds people and saves the history.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-warning">
+            <div class="card-body"><h3 class="h6">Full stack</h3>Both parts together make one working website.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5 card-title">What is used</h2>
+          <button type="button" class="btn btn-outline-secondary btn-sm mb-3" id="toggle-details">Hide the technology table</button>
+          <div id="details">
+            <table class="table table-striped table-bordered">
+              <tr>
+                <th>Part</th>
+                <th>Made with</th>
+              </tr>
+              <tr>
+                <td>Pages</td>
+                <td>HTML5, CSS3, JavaScript, Bootstrap 5</td>
+              </tr>
+              <tr>
+                <td>Background program</td>
+                <td>Python, FastAPI, OpenCV</td>
+              </tr>
+              <tr>
+                <td>Finding people</td>
+                <td>YOLO11 model</td>
+              </tr>
+              <tr>
+                <td>History table</td>
+                <td>SQLite</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5 card-title">Team</h2>
+          <table class="table table-striped table-bordered team">
             <tr>
-              <th>Part</th>
-              <th>Made with</th>
+              <th>Name</th>
+              <th>USN</th>
+              <th>Student ID</th>
             </tr>
             <tr>
-              <td>Pages</td>
-              <td>HTML5, CSS3, JavaScript, Bootstrap 5 (gallery page)</td>
+              <td>Yajat Vinay Ghule</td>
+              <td>2RUA26CSE0154</td>
+              <td>RVUM26CSE031</td>
             </tr>
             <tr>
-              <td>Background program</td>
-              <td>Python, FastAPI, OpenCV</td>
+              <td>Sudharsan Srinivasan</td>
+              <td>2RUA26CSE0132</td>
+              <td>RVUM26CSE171</td>
             </tr>
             <tr>
-              <td>Finding people</td>
-              <td>YOLO11 model</td>
+              <td>Vivin Premsagar K</td>
+              <td>2RUA26CSE0152</td>
+              <td>RVUM26CSE047</td>
             </tr>
             <tr>
-              <td>History table</td>
-              <td>SQLite</td>
+              <td>Yaksha M</td>
+              <td>2RUA26CSE0155</td>
+              <td>RVUM26CSE179</td>
             </tr>
           </table>
         </div>
-      </section>
+      </div>
 
-      <section>
-        <h2>Team</h2>
-        <table class="team">
-          <tr>
-            <th>Name</th>
-            <th>USN</th>
-            <th>Student ID</th>
-          </tr>
-          <tr>
-            <td>Yajat Vinay Ghule</td>
-            <td>2RUA26CSE0154</td>
-            <td>RVUM26CSE031</td>
-          </tr>
-          <tr>
-            <td>Sudharsan Srinivasan</td>
-            <td>2RUA26CSE0132</td>
-            <td>RVUM26CSE171</td>
-          </tr>
-          <tr>
-            <td>Vivin Premsagar K</td>
-            <td>2RUA26CSE0152</td>
-            <td>RVUM26CSE047</td>
-          </tr>
-          <tr>
-            <td>Yaksha M</td>
-            <td>2RUA26CSE0155</td>
-            <td>RVUM26CSE179</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h2>Privacy</h2>
-        <p>Nothing is sent to the internet. There is no face recognition.</p>
-      </section>
+      <div class="alert alert-info">
+        <b>Privacy:</b> nothing is sent to the internet. There is no face recognition.
+      </div>
     </main>
 
     <footer>
-      <p>Web Technology mini project. Everything runs on this computer.</p>
+      <p class="mb-0">Web Technology mini project, RV University. Everything runs on this computer.</p>
     </footer>
 
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,178 +1,60 @@
-/* RVU ID Card Detector - one external style sheet for every page */
+/* RVU ID Card Detector - our own style sheet
+   Bootstrap (bootstrap/bootstrap.min.css) gives the navbar, cards, buttons and forms.
+   This file comes AFTER Bootstrap in the <head>, so our rules win when both set the same thing
+   (that is the cascade: the later rule wins when the selectors are equally specific). */
 
-/* universal selector + box model: padding and border count inside the width */
+/* universal selector + box model */
 * {
   box-sizing: border-box;
 }
 
-/* element selectors */
+/* element selector */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f7fb;
-  color: #222222;
-  margin: 0;
-  line-height: 1.5;
-}
-
-h1 {
-  color: white;
-  font-size: 2rem;
-  margin: 0;
-}
-
-h2 {
-  color: darkblue;
-  font-size: 1.4rem;
-  border-bottom: 2px solid lightblue;
-  padding-bottom: 4px;
-}
-
-/* header and menu: Flexbox */
-header {
-  background-color: darkblue;
-  padding: 20px;
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  background-color: lightblue;
-  padding: 10px 20px;
-}
-
-nav a {
-  padding: 6px 14px;
-  border-radius: 4px;
-  text-decoration: none;
-  color: darkblue;
-  font-weight: bold;
-}
-
-nav a:hover {
-  background-color: white;
-}
-
-nav a.active {
-  background-color: darkblue;
-  color: white;
-}
-
-main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-footer {
-  text-align: center;
-  font-size: 0.85rem;
-  color: grey;
-  padding: 20px;
-}
-
-/* link states (order: link, visited, hover, active) */
-a:link {
-  color: blue;
-}
-
-a:visited {
-  color: purple;
-}
-
-a:hover {
-  color: red;
-}
-
-a:active {
-  color: orange;
-}
-
-/* images: never wider than the screen */
-img {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid black;
-}
-
-iframe {
-  width: 100%;
-  border: 1px solid grey;
-  background-color: white;
-}
-
-/* tables */
-table {
-  border-collapse: collapse;
-  width: 100%;
-  background-color: white;
-}
-
-th, td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: lightblue;
-}
-
-tr:nth-child(even) {
   background-color: #eef3fa;
 }
 
-/* forms */
-label {
-  font-weight: bold;
+/* our own colour for the top bar (class selector) */
+.bg-rvu {
+  background-color: #0b2a5b;
 }
 
-input, select {
-  padding: 6px;
-  border: 1px solid grey;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-input:focus, select:focus {
-  border-color: darkblue;
-  background-color: #fffbe6;
-}
-
-input[type="submit"], button {
-  background-color: darkblue;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type="submit"]:hover, button:hover {
-  background-color: blue;
-}
-
-/* box model card: padding, border, margin */
-.card {
+/* page title strip under the menu */
+.page-title {
   background-color: white;
-  border: 1px solid lightblue;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 15px 0;
+  border-bottom: 3px solid #0b2a5b;
+  padding: 18px 0;
+  margin-bottom: 24px;
 }
 
-/* Grid of cards: 3 columns on a laptop */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-
-.cards .card {
+.page-title h1 {
+  color: #0b2a5b;
+  font-size: 1.8rem;
   margin: 0;
 }
 
-/* class selectors */
+/* descendant selector: only h2 inside a card */
+.card h2 {
+  color: #0b2a5b;
+}
+
+/* pseudo-class: lift a card a little when the mouse is over it */
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* id selector: the live camera picture */
+#live {
+  width: 100%;
+  height: auto;
+  border: 3px solid #0b2a5b;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 6px;
+  background-color: black;
+}
+
+/* colour words used on the Home page */
 .green {
   color: green;
 }
@@ -185,34 +67,63 @@ input[type="submit"]:hover, button:hover {
   color: grey;
 }
 
-.note {
-  color: darkred;
+/* box model on the small iframes (they show pages made by Python) */
+iframe {
+  width: 100%;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  background-color: white;
+}
+
+/* plain tables inside the iframes do not have Bootstrap, so style them here */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #cccccc;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #0b2a5b;
+  color: white;
+}
+
+/* nth-child: stripe every second row */
+tr:nth-child(even) {
+  background-color: #f4f7fb;
+}
+
+/* the count line inside the stats iframe */
+.stats {
+  margin: 8px;
+  font-size: 1.1rem;
+}
+
+/* the delete dialog box */
+dialog {
+  border: 2px solid #0b2a5b;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+}
+
+footer {
+  background-color: #0b2a5b;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  margin-top: 40px;
   font-size: 0.9rem;
 }
 
-/* id selector */
-#message {
-  font-weight: bold;
-  color: darkblue;
-}
-
-#message.error {
-  color: red;
-}
-
-/* specificity: the id (#message.error) beats the class (.note) beats the element (p) */
-
-/* responsive: on a phone or a small window the cards stack and the menu wraps */
+/* media query: smaller title on a phone */
 @media (max-width: 700px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  main {
-    padding: 10px;
+  .page-title h1 {
+    font-size: 1.4rem;
   }
 }

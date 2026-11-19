@@ -18,7 +18,8 @@ function showMessage(text, isError) {
   const box = document.getElementById("message");
   if (!box) return;
   box.textContent = text;
-  box.className = isError ? "error" : "";
+  // Bootstrap alert classes: red box for an error, green box otherwise
+  box.className = isError ? "alert alert-danger" : "alert alert-success";
 }
 
 // arrow function
@@ -32,7 +33,7 @@ function describePage(page) {
 
 // ---- 1. mark the current page in the menu --------------------------------------------
 const current = location.pathname.split("/").pop() || "index.html";
-document.querySelectorAll("nav a").forEach((link) => {
+document.querySelectorAll("nav .nav-link").forEach((link) => {
   if (link.getAttribute("href") === current) link.classList.add("active");
 });
 
@@ -57,6 +58,24 @@ if (live) {
   // the error can happen before this script runs, so check once more now
   if (live.complete && live.naturalWidth === 0) useSample();
 }
+
+// ---- 3b. the small boxes (iframes) need the detector too ----------------------------
+// The Python program gives them the title "Stats" or "History". Any other title means
+// the page was not found, so we put a short note in place of the box.
+function checkFrame(frame) {
+  const doc = frame.contentDocument;
+  if (!doc || doc.URL === "about:blank" || doc.readyState !== "complete") return;
+  if (doc.title !== frame.title) {
+    const note = document.createElement("p");
+    note.className = "text-muted";
+    note.textContent = "This shows up when the detector is running on this computer.";
+    frame.replaceWith(note);
+  }
+}
+document.querySelectorAll("iframe").forEach((frame) => {
+  frame.addEventListener("load", () => checkFrame(frame));
+  checkFrame(frame); // in case it already finished loading
+});
 
 // ---- 4. Settings page: check the values before the form is sent ----------------------
 const settingsForm = document.getElementById("settings-form");

@@ -4,50 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>History - RVU ID Card Detector</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <header>
-      <h1>RVU ID Card Detector</h1>
-    </header>
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="upload.html">Upload</a>
-      <a href="history.html">History</a>
-      <a href="settings.html">Settings</a>
-      <a href="about.html">About</a>
-      <a href="gallery.html">Gallery</a>
+    <!-- menu bar (Bootstrap navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-rvu">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">RVU ID Card Detector</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Open the menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="upload.html">Upload</a></li>
+            <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+            <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
-    <main>
-      <section>
-        <h2>History</h2>
-        <p>This table shows every time a student was seen without the ID card.</p>
-        <iframe src="fragments/history" height="400" title="History table"></iframe>
-        <p><a href="history.csv">Download the table as a CSV file</a></p>
-      </section>
+    <header class="page-title">
+      <div class="container">
+        <h1>History</h1>
+        <p class="text-muted mb-0">Every time a student was seen without the ID card.</p>
+      </div>
+    </header>
 
-      <section class="card">
-        <h2>Delete history</h2>
-        <p class="note">This deletes all rows and all saved photos. It cannot be undone.</p>
-        <button type="button" id="ask-delete">Delete all history</button>
+    <main class="container">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5 card-title">Saved records</h2>
+          <iframe src="fragments/history" height="400" title="History"></iframe>
+          <a href="history.csv" class="btn btn-outline-primary mt-3">Download as CSV</a>
+        </div>
+      </div>
 
-        <dialog id="confirm-dialog">
-          <form method="post" action="api/history/clear">
-            <p>Delete all rows and photos? This cannot be undone.</p>
-            <button type="button" id="cancel-delete">Cancel</button>
-            <input type="submit" value="Yes, delete" />
-          </form>
-        </dialog>
-      </section>
+      <div class="card border-danger">
+        <div class="card-body">
+          <h2 class="h5 card-title">Delete history</h2>
+          <p class="text-danger">This deletes all rows and all saved photos. It cannot be undone.</p>
+          <button type="button" class="btn btn-danger" id="ask-delete">Delete all history</button>
+        </div>
+      </div>
+
+      <!-- HTML dialog box, opened by script.js -->
+      <dialog id="confirm-dialog">
+        <form method="post" action="api/history/clear">
+          <p>Delete all rows and photos? This cannot be undone.</p>
+          <button type="button" class="btn btn-secondary" id="cancel-delete">Cancel</button>
+          <input type="submit" class="btn btn-danger" value="Yes, delete" />
+        </form>
+      </dialog>
     </main>
 
     <footer>
-      <p>Web Technology mini project. Everything runs on this computer.</p>
+      <p class="mb-0">Web Technology mini project, RV University. Everything runs on this computer.</p>
     </footer>
 
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -4,86 +4,104 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Settings - RVU ID Card Detector</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <header>
-      <h1>RVU ID Card Detector</h1>
-    </header>
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="upload.html">Upload</a>
-      <a href="history.html">History</a>
-      <a href="settings.html">Settings</a>
-      <a href="about.html">About</a>
-      <a href="gallery.html">Gallery</a>
+    <!-- menu bar (Bootstrap navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-rvu">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">RVU ID Card Detector</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Open the menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="upload.html">Upload</a></li>
+            <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+            <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
-    <main>
-      <section class="card">
-        <h2>Settings</h2>
-        <p>Change the values and press Save.</p>
+    <header class="page-title">
+      <div class="container">
+        <h1>Settings</h1>
+        <p class="text-muted mb-0">Change the values and press Save.</p>
+      </div>
+    </header>
 
-        <form id="settings-form" method="post" action="api/settings">
-          <table>
-            <tr>
-              <td><label for="band_color">Band colour of the ID card</label></td>
-              <td><input type="color" id="band_color" name="band_color" value="#1e40af" /> <span id="color-text"></span></td>
-            </tr>
-            <tr>
-              <td><label for="tolerance">Colour tolerance (5 to 80)</label></td>
-              <td><input type="number" id="tolerance" name="tolerance" min="5" max="80" value="25" required /></td>
-            </tr>
-            <tr>
-              <td><label for="on_threshold">Score needed for WEARING (0 to 1)</label></td>
-              <td><input type="number" id="on_threshold" name="on_threshold" min="0" max="1" step="0.05" value="0.6" required /></td>
-            </tr>
-            <tr>
-              <td><label for="off_threshold">Score for NOT WEARING (0 to 1)</label></td>
-              <td><input type="number" id="off_threshold" name="off_threshold" min="0" max="1" step="0.05" value="0.35" required /></td>
-            </tr>
-            <tr>
-              <td><label for="violation_seconds">Seconds before it is saved in History</label></td>
-              <td><input type="number" id="violation_seconds" name="violation_seconds" min="0" step="0.5" value="3.0" required /></td>
-            </tr>
-            <tr>
-              <td><label for="person_conf">Person confidence (0 to 1)</label></td>
-              <td><input type="number" id="person_conf" name="person_conf" min="0" max="1" step="0.05" value="0.4" required /></td>
-            </tr>
-            <tr>
-              <td><label for="camera">Camera number (0 is the first webcam)</label></td>
-              <td><input type="text" id="camera" name="camera" value="0" required /></td>
-            </tr>
-            <tr>
-              <td><label for="device">Run on</label></td>
-              <td>
-                <select id="device" name="device">
-                  <option value="auto">auto</option>
-                  <option value="cpu">cpu</option>
-                  <option value="cuda">cuda</option>
-                  <option value="directml">directml</option>
-                  <option value="openvino">openvino</option>
-                  <option value="coreml">coreml</option>
-                </select>
-              </td>
-            </tr>
-          </table>
+    <main class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body">
+              <form id="settings-form" method="post" action="api/settings">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="band_color" class="form-label">Band colour of the ID card</label>
+                    <div>
+                      <input type="color" class="form-control form-control-color d-inline-block" id="band_color" name="band_color" value="#1e40af" />
+                      <span id="color-text" class="ms-2"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="tolerance" class="form-label">Colour tolerance (5 to 80)</label>
+                    <input type="number" class="form-control" id="tolerance" name="tolerance" min="5" max="80" value="25" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="on_threshold" class="form-label">Score needed for WEARING (0 to 1)</label>
+                    <input type="number" class="form-control" id="on_threshold" name="on_threshold" min="0" max="1" step="0.05" value="0.6" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="off_threshold" class="form-label">Score for NOT WEARING (0 to 1)</label>
+                    <input type="number" class="form-control" id="off_threshold" name="off_threshold" min="0" max="1" step="0.05" value="0.35" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="violation_seconds" class="form-label">Seconds before it is saved in History</label>
+                    <input type="number" class="form-control" id="violation_seconds" name="violation_seconds" min="0" step="0.5" value="3.0" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="person_conf" class="form-label">Person confidence (0 to 1)</label>
+                    <input type="number" class="form-control" id="person_conf" name="person_conf" min="0" max="1" step="0.05" value="0.4" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="camera" class="form-label">Camera number (0 is the first webcam)</label>
+                    <input type="text" class="form-control" id="camera" name="camera" value="0" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="device" class="form-label">Run on</label>
+                    <select class="form-select" id="device" name="device">
+                      <option value="auto">auto</option>
+                      <option value="cpu">cpu</option>
+                      <option value="cuda">cuda</option>
+                      <option value="directml">directml</option>
+                      <option value="openvino">openvino</option>
+                      <option value="coreml">coreml</option>
+                    </select>
+                    <div class="form-text">Intel laptop with Arc graphics: choose openvino (or leave it on auto).</div>
+                  </div>
+                </div>
 
-          <p id="message"></p>
-          <p>
-            <input type="submit" value="Save" />
-          </p>
-        </form>
-        <p class="note">Intel laptop with Arc graphics: choose openvino (or leave it on auto).</p>
-      </section>
+                <div id="message" class="alert d-none mt-3"></div>
+                <input type="submit" class="btn btn-primary mt-3" value="Save" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer>
-      <p>Web Technology mini project. Everything runs on this computer.</p>
+      <p class="mb-0">Web Technology mini project, RV University. Everything runs on this computer.</p>
     </footer>
 
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

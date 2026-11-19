@@ -4,50 +4,79 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Home - RVU ID Card Detector</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <header>
-      <h1>RVU ID Card Detector</h1>
-    </header>
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="upload.html">Upload</a>
-      <a href="history.html">History</a>
-      <a href="settings.html">Settings</a>
-      <a href="about.html">About</a>
-      <a href="gallery.html">Gallery</a>
+    <!-- menu bar (Bootstrap navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-rvu">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">RVU ID Card Detector</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Open the menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="upload.html">Upload</a></li>
+            <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+            <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
-    <main>
-      <section>
-        <h2>Live camera</h2>
-        <p>Every person in front of the camera gets a box.</p>
-        <p id="message"></p>
-        <img id="live" src="stream" alt="Live camera with a box around every person" width="640" height="480" />
-      </section>
+    <header class="page-title">
+      <div class="container">
+        <h1>Live camera</h1>
+        <p class="text-muted mb-0">Every person in front of the camera gets a box.</p>
+      </div>
+    </header>
 
-      <section>
-        <h2>What the colours mean</h2>
-        <div class="cards">
-          <div class="card"><b class="green">Green box</b><br />The student is wearing the ID card.</div>
-          <div class="card"><b class="red">Red box</b><br />The student is not wearing the ID card.</div>
-          <div class="card"><b class="grey">Grey box</b><br />Not sure. The person is turned away or too far.</div>
+    <main class="container">
+      <div class="row g-4">
+        <!-- left side: the camera picture -->
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="h5 card-title">Camera</h2>
+              <div id="message" class="alert d-none"></div>
+              <img id="live" src="stream" alt="Live camera with a box around every person" width="640" height="480" />
+            </div>
+          </div>
         </div>
-      </section>
 
-      <section>
-        <h2>Count</h2>
-        <iframe src="fragments/stats" height="60" title="Live count"></iframe>
-      </section>
+        <!-- right side: count and colours -->
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="h5 card-title">Count</h2>
+              <iframe src="fragments/stats" height="90" title="Stats"></iframe>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h2 class="h5 card-title">What the colours mean</h2>
+              <ul class="list-group">
+                <li class="list-group-item"><span class="badge bg-success">Green</span> wearing the ID card</li>
+                <li class="list-group-item"><span class="badge bg-danger">Red</span> not wearing the ID card</li>
+                <li class="list-group-item"><span class="badge bg-secondary">Grey</span> not sure (turned away or too far)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer>
-      <p>Web Technology mini project. Everything runs on this computer. Tip: press 1 to 6 to change page.</p>
+      <p class="mb-0">Web Technology mini project, RV University. Everything runs on this computer. Tip: press 1 to 6 to change page.</p>
     </footer>
 
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
