@@ -1,7 +1,7 @@
 # RVU ID Card Detector - one line Windows installer (Node.js version)
 #
 # Paste this into PowerShell (no administrator needed):
-#   irm https://yajatghule.github.io/rvu-id-detector/install.ps1 | iex
+#   irm https://raw.githubusercontent.com/YajatGhule/rvu-id-detector/main/web/install.ps1 | iex
 #
 # What it does:
 #   1. uses Node.js if it is installed, otherwise downloads the official portable Node.js

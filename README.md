@@ -43,7 +43,7 @@ but nothing needs to be installed and the camera picture never leaves the comput
 Paste this into PowerShell. No administrator rights are needed:
 
 ```
-irm https://yajatghule.github.io/rvu-id-detector/install.ps1 | iex
+irm https://raw.githubusercontent.com/YajatGhule/rvu-id-detector/main/web/install.ps1 | iex
 ```
 
 It downloads portable Node.js (only if Node.js is missing) and this project into
