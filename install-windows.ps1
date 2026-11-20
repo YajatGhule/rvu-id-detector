@@ -85,12 +85,12 @@ Write-Host "model found: $model ($([math]::Round((Get-Item $model).Length / 1MB,
 if ($Openvino) {
     Step "Adding OpenVINO for Intel graphics"
     try {
-        Run uv pip uninstall onnxruntime
+        Run uv pip uninstall onnxruntime-directml
         Run uv pip install onnxruntime-openvino
         Run uv run --no-sync idcard doctor
     } catch {
         Write-Host "OpenVINO did not work, going back to the normal CPU version." -ForegroundColor Yellow
-        Run uv sync --reinstall-package onnxruntime
+        Run uv sync --reinstall-package onnxruntime-directml
     }
 }
 

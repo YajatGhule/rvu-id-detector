@@ -11,7 +11,7 @@
 //   5. the result is smoothed over 15 frames so the label does not flicker
 // Nothing leaves the computer: the picture is only drawn on a <canvas> on this page.
 
-const ORT_URL = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/";
+const ORT_URL = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.31.1/dist/";
 const MODEL_URL = "models/yolo11n-pose.onnx";
 const SIZE = 640; // the model looks at a 640 x 640 picture
 

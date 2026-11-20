@@ -10,7 +10,8 @@ dependencies = [
     "python-multipart>=0.0.9",
     "opencv-python-headless>=4.9",
     "numpy",
-    "onnxruntime>=1.19",
+    "onnxruntime>=1.19; sys_platform != 'win32'",
+    "onnxruntime-directml>=1.19; sys_platform == 'win32'",  # runs on any DirectX 12 GPU (Intel Arc, AMD, NVIDIA)
     "supervision>=0.25",
 ]
 

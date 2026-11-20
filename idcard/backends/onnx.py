@@ -48,6 +48,10 @@ class OnnxPoseModel:
     def __init__(self, model_path: Path, providers: list[str]):
         options = ort.SessionOptions()
         options.log_severity_level = 3  # only errors
+        if "DmlExecutionProvider" in providers:
+            # DirectML (Windows GPUs) needs these two settings, see the ONNX Runtime docs
+            options.enable_mem_pattern = False
+            options.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
         try:
             self.session = ort.InferenceSession(str(model_path), options, providers=providers)
         except Exception:
