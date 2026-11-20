@@ -52,6 +52,9 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, {
       "Content-Type": TYPES[path.extname(file).toLowerCase()] || "application/octet-stream",
       "Content-Length": stat.size,
+      // these two headers let the detector use several CPU cores (SharedArrayBuffer)
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "credentialless",
     });
     fs.createReadStream(file).pipe(res);
   });

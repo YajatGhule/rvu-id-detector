@@ -62,9 +62,11 @@ async function startBrowserCamera() {
     await cam.video.play();
 
     status.textContent = "Loading the detector (about 12 MB, only the first time)...";
-    if (!window.ort) await loadScript(ORT_URL + "ort.min.js");
+    if (!window.ort) await loadScript(ORT_URL + "ort.webgpu.min.js");
     ort.env.wasm.wasmPaths = ORT_URL;
-    cam.session = await ort.InferenceSession.create(MODEL_URL, { executionProviders: ["wasm"] });
+    // use several CPU cores when the page is allowed to (the Node.js server allows it)
+    ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;
+    cam.session = await createSession();
 
     // swap the sample picture for a canvas that shows the camera
     const live = document.getElementById("live");
@@ -85,6 +87,21 @@ async function startBrowserCamera() {
     button.disabled = false;
     showMessage("Could not start the camera: " + error.message, true);
   }
+}
+
+// try the graphics card first (WebGPU, much faster), and the CPU (WebAssembly) if that fails
+async function createSession() {
+  if (navigator.gpu) {
+    try {
+      const session = await ort.InferenceSession.create(MODEL_URL, { executionProviders: ["webgpu"] });
+      cam.backend = "graphics card";
+      return session;
+    } catch (error) {
+      console.log("WebGPU did not work, using the CPU:", error.message);
+    }
+  }
+  cam.backend = ort.env.wasm.numThreads > 1 ? `CPU, ${ort.env.wasm.numThreads} cores` : "CPU";
+  return ort.InferenceSession.create(MODEL_URL, { executionProviders: ["wasm"] });
 }
 
 function stopBrowserCamera() {
@@ -121,7 +138,7 @@ async function loop() {
   }
   const ms = Math.round(performance.now() - started);
   document.getElementById("cam-count").textContent =
-    `People: ${tracked.length} | Wearing: ${wearing} | Not wearing: ${notWearing} | Not sure: ${unsure} | ${ms} ms per frame`;
+    `People: ${tracked.length} | Wearing: ${wearing} | Not wearing: ${notWearing} | Not sure: ${unsure} | ${ms} ms per frame (${cam.backend})`;
   requestAnimationFrame(loop);
 }
 
