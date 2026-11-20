@@ -38,6 +38,20 @@ Home page. The same steps then run inside the browser with ONNX Runtime Web
 (`web/browser-camera.js`). It is slower (about 1 to 2 frames a second) and nothing is saved,
 but nothing needs to be installed and the camera picture never leaves the computer.
 
+## Windows in one line (Node.js, no Python)
+
+Paste this into PowerShell. No administrator rights are needed:
+
+```
+irm https://yajatghule.github.io/rvu-id-detector/install.ps1 | iex
+```
+
+It downloads portable Node.js (only if Node.js is missing) and this project into
+`%USERPROFILE%\rvu-id-detector`, puts a shortcut on the Desktop and opens
+http://localhost:3000. The small server is `node-server/server.js` and the detection runs in
+the browser, so Smart App Control has no unsigned program to block. The Upload, History and
+Settings pages still need the Python version.
+
 ## How it works
 
 1. A YOLO11 pose model finds each person and their shoulders and hips.
