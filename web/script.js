@@ -51,8 +51,11 @@ if (live) {
   const useSample = () => {
     if (live.src.endsWith(sampleImage)) return; // already showing the sample
     live.src = sampleImage; // this image is part of the website, so it always loads
-    showMessage("The detector is not running here, so this is a sample result. " +
-      "Start it with: uv run idcard serve", true);
+    showMessage("The detector program is not running here, so this is a sample result. " +
+      "Press \"Use my camera\" to run it in this browser instead.", true);
+    // show the browser camera controls (see browser-camera.js)
+    const browserCam = document.getElementById("browser-cam");
+    if (browserCam) browserCam.classList.remove("d-none");
   };
   live.addEventListener("error", useSample);
   // the error can happen before this script runs, so check once more now

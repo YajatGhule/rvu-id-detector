@@ -45,6 +45,20 @@
               <h2 class="h5 card-title">Camera</h2>
               <div id="message" class="alert d-none"></div>
               <img id="live" src="stream" alt="Live camera with a box around every person" width="640" height="480" />
+
+              <!-- shown only when the Python detector is not running (for example on GitHub Pages) -->
+              <div id="browser-cam" class="mt-3 d-none">
+                <p class="mb-2">No detector program here? Run it inside this browser with your own webcam:</p>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <button id="cam-start" type="button" class="btn btn-primary">Use my camera</button>
+                  <button id="cam-stop" type="button" class="btn btn-outline-secondary" hidden>Stop camera</button>
+                  <label for="cam-color" class="ms-2">Band colour</label>
+                  <input id="cam-color" type="color" value="#1e40af" class="form-control form-control-color" />
+                  <span id="cam-status" class="text-muted"></span>
+                </div>
+                <p id="cam-count" class="mt-2 mb-0 fw-bold"></p>
+                <video id="cam-video" muted playsinline hidden></video>
+              </div>
             </div>
           </div>
         </div>
@@ -78,5 +92,6 @@
 
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script src="browser-camera.js"></script>
   </body>
 </html>

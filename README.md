@@ -31,6 +31,13 @@ uv run idcard serve
 Then open http://127.0.0.1:8000 in a browser. `uv run idcard doctor` shows which backend
 loaded and the speed on your machine. `uv run pytest` runs the tests.
 
+## Try it without installing
+
+On the website (https://yajatghule.github.io/rvu-id-detector/) press "Use my camera" on the
+Home page. The same steps then run inside the browser with ONNX Runtime Web
+(`web/browser-camera.js`). It is slower (about 1 to 2 frames a second) and nothing is saved,
+but nothing needs to be installed and the camera picture never leaves the computer.
+
 ## How it works
 
 1. A YOLO11 pose model finds each person and their shoulders and hips.
